@@ -990,6 +990,7 @@ through the provider `opts`:
         For example: If you have three buffers with the paths `'/home/user/file.lua'`, `'/home/user/dir1/file.lua'` and `'/home/user/dir2/file.lua'`, Feline will show the names `'user/file.lua'`, `'dir1/file.lua'` and `'dir2/file.lua'` for them, respectively.<br>
         If there aren’t any files that share the same name, it behaves the same as `'base-only'`.
     - `'unique-short'`: Combination of `'unique'` and `'short-path'`.
+    - A function which receives the absolute path and returns a value to be displayed.
     <br>Default: `'base-only'`
 
 
