@@ -96,22 +96,24 @@ function M.file_info(component, opts)
     end
 
     local filename = api.nvim_buf_get_name(0)
-    local type = opts.type or 'base-only'
-    if filename == '' then
+    local typ = opts.type or 'base-only'
+    if type(typ) == 'function' then
+        filename = typ(filename)
+    elseif filename == '' then
         filename = '[No Name]'
-    elseif type == 'short-path' then
+    elseif typ == 'short-path' then
         filename = fn.pathshorten(filename)
-    elseif type == 'base-only' then
+    elseif typ == 'base-only' then
         filename = fn.fnamemodify(filename, ':t')
-    elseif type == 'relative' then
+    elseif typ == 'relative' then
         filename = fn.fnamemodify(filename, ':~:.')
-    elseif type == 'relative-short' then
+    elseif typ == 'relative-short' then
         filename = fn.pathshorten(fn.fnamemodify(filename, ':~:.'))
-    elseif type == 'unique' then
+    elseif typ == 'unique' then
         filename = get_unique_filename(filename)
-    elseif type == 'unique-short' then
+    elseif typ == 'unique-short' then
         filename = get_unique_filename(filename, true)
-    elseif type ~= 'full-path' then
+    elseif typ ~= 'full-path' then
         filename = fn.fnamemodify(filename, ':t')
     end
 
